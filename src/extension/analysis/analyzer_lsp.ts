@@ -35,6 +35,16 @@ export class LspAnalyzer extends Analyzer {
 			this.client.onNotification(AnalyzerStatusNotification.type, (params) => {
 				this.onAnalysisStatusChangeEmitter.fire({ isAnalyzing: params.isAnalyzing });
 			});
+			// TODO: This needs to he handled somehow
+			// https://github.com/microsoft/vscode-languageserver-node/issues/671
+			// console.log("Registering...");
+			// this.client.onProgress(WorkDoneProgress.type, "ANALYZING", (params) => {
+			// 	console.log("Got progress event...");
+			// 	if (params.kind === "begin")
+			// 		this.onAnalysisStatusChangeEmitter.fire({ isAnalyzing: true });
+			// 	else if (params.kind === "end")
+			// 		this.onAnalysisStatusChangeEmitter.fire({ isAnalyzing: false });
+			// });
 			this.onReadyCompleter.resolve();
 		});
 	}
